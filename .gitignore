@@ -142,3 +142,5 @@ dmypy.json
 # downloaded model
 component/BETTER/joint/worked_model_ace
 
+# mac
+*.DS_STORE
