@@ -137,3 +137,8 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+
+# downloaded model
+component/BETTER/joint/worked_model_ace
+

@@ -9,6 +9,7 @@ import random
 import math
 import time
 import copy
+import spacy
 import torch
 from neural_model import BertClassifier
 from torch.utils import data
@@ -19,6 +20,7 @@ from eval import *
 import pdb
 from EventPipeline import EventPipeline
 from JsonBuilder import JsonBuilder
+import IPython
 
 def str2bool(v):
     if isinstance(v, bool):
@@ -173,6 +175,7 @@ class BETTER_API:
         json_out = json_builder.from_preds(input_sent, y_preds_t, y_preds_e, y_preds_ner)
         return json_out
 def main(args):
+
     api = BETTER_API()
     # input_sent = ['Yesterday', 'New', 'York', 'governor', 'George', 'Pataki', 'toured', 'five', 'counties', 'that', 'have', 'been', 'declared', 'under', 'a', 'state', 'of', 'emergency']
     # input_sent = ["We", "'re", "talking", "about", "possibilities", "of", "full", "scale", "war", "with", "former", "Congressman", "Tom", "Andrews", ",", "Democrat", "of", "Maine", "."]
@@ -182,17 +185,18 @@ def main(args):
     # raw_text = 'I like pizza.\nI ate a pizza.      \n I gained weights after one month.'
     raw_text = 'Brooklyn Beckham asked Nicola Peltz to marry him , and she said yes , the cameraman and model announced on Saturday \n.\n \n\n     Beckham , whose parents are retired soccer star David Beckham and fashion designer Victoria Beckham , popped the big question two weeks ago , but they ’re just letting the world know now .'
     # raw_text = ' \n '
-    import spacy
+    
 
     nlp = spacy.load("en_core_web_sm")
     doc = nlp(raw_text)
     input_sent = [x.text for x in doc]
-    pdb.set_trace()
+    # pdb.set_trace()
     print(api.pred(input_sent))
+    IPython.embed()
 
 if __name__ == '__main__':
     p = argparse.ArgumentParser()
-
+    
     # training argument
     p.add_argument('-batch', type=int, default=2)
     p.add_argument('-iter_size', type=int, default=2, help='how many batches to accumulate')
